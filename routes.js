@@ -8,5 +8,6 @@ router.route('/')
 
 router.route('/:studentId')
     .get(studentControllers.getStudentById)
+    .put(studentControllers.updateStudentById)
 
 module.exports = router;
