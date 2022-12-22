@@ -53,6 +53,23 @@ exports.updateStudentById = async (req, res) => {
         })
     }
 }
+exports.deleteStudentById = async (req, res) => {
+    try {
+        const { studentId } = req.params;
+        await Student.deleteOne({ _id: studentId });
+
+        res.status(201).json({
+            success: true,
+            message: 'Successfully delete student'
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Couldn't delete student",
+            error: error.message
+        })
+    }
+}
 
 exports.addStudent = async (req, res) => {
     try {
