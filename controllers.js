@@ -1,5 +1,23 @@
 const Student = require("./Student")
 
+exports.getStudents = async (req, res) => {
+    try {
+        const students = await Student.find();
+
+        res.status(201).json({
+            success: true,
+            message: 'Successfully get students',
+            students
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Couldn't get students",
+            error: error.message
+        })
+    }
+}
+
 exports.addStudent = async (req, res) => {
     try {
         const student = new Student(req.body);
