@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 
 const studentSchema = new Schema({
@@ -28,3 +28,7 @@ const studentSchema = new Schema({
         minlength: 11
     }
 })
+
+const Student = model('Student', studentSchema);
+
+module.exports = Student;
