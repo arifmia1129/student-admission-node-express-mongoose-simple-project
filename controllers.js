@@ -4,13 +4,8 @@ exports.getStudents = async (req, res) => {
     try {
         const students = await Student.find();
 
-        res.render('index', { students })
+        res.render('index', { students, error: {} })
 
-        // res.status(200).json({
-        //     success: true,
-        //     message: 'Successfully get students',
-        //     students
-        // })
     } catch (error) {
         return res.status(500).json({
             success: false,
@@ -72,16 +67,58 @@ exports.deleteStudentById = async (req, res) => {
         })
     }
 }
+exports.deleteStudent = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Student.deleteOne({ _id: id });
+        const students = await Student.find();
+        res.render('index', { students, error: {} })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Couldn't delete student",
+            error: error.message
+        })
+    }
+}
 
 exports.addStudent = async (req, res) => {
     try {
-        const student = new Student(req.body);
-        await student.save();
+        let error = {};
+        const { name, fathersName, mothersName, className, guardiansMobile, id } = req.body;
 
-        res.status(201).json({
-            success: true,
-            message: 'Successfully add student'
-        })
+        if (!name) {
+            error.name = 'Please provide a name'
+        }
+        if (!fathersName) {
+            error.fathersName = 'Please provide a father name'
+        }
+        if (!mothersName) {
+            error.mothersName = 'Please provide a mother name'
+        }
+        if (!className) {
+            error.className = 'Please provide a class name'
+        }
+        if (!guardiansMobile) {
+            error.guardiansMobile = 'Please provide a mobile number'
+        }
+
+        const isValid = Object.keys(error).length == 0;
+        const students = await Student.find();
+        if (!isValid) {
+            return res.render('index', { students, error })
+        }
+
+        const student = new Student({
+            name,
+            fathersName,
+            mothersName,
+            class: className,
+            guardiansMobile
+        });
+        await student.save();
+        const latestStudents = await Student.find();
+        res.render('index', { students: latestStudents, error: {} })
     } catch (error) {
         return res.status(500).json({
             success: false,

@@ -20,33 +20,54 @@
             <form action="/api/student" method="POST">
                 <div class="mb-3">
                     <label for="name" class="form-label">Student name</label>
-                    <input type="text" class="form-control w-25" id="name" placeholder="Student name" name="name">
+                    <input type="text" class="form-control w-25 <%= error.name ? 'is-invalid':''%>" id="name"
+                        placeholder="Student name" name="name">
+                    <div class="invalid-feedback">
+                        <%=error.name%>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">Father name</label>
-                    <input type="text" class="form-control w-25" id="fatherName" placeholder="Father name"
-                        name="fatherName">
+                    <input type="text" class="form-control w-25 <%= error.fathersName ? 'is-invalid':''%>"
+                        id="fathersName" placeholder="Father name" name="fathersName">
+                    <div class="invalid-feedback">
+                        <%=error.fathersName%>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">Mother name</label>
-                    <input type="text" class="form-control w-25" id="motherName" placeholder="Mother name"
-                        name="motherName">
+                    <input type="text" class="form-control w-25 <%= error.mothersName ? 'is-invalid':''%>"
+                        id="mothersName" placeholder="Mother name" name="mothersName">
+                    <div class="invalid-feedback">
+                        <%=error.mothersName%>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="name" class="form-label">Mobile</label>
-                    <input type="text" class="form-control w-25" id="mobile" placeholder="Mobile number" name="mobile">
+                    <input type="text" class="form-control w-25 <%= error.guardiansMobile ? 'is-invalid':''%>"
+                        id="guardiansMobile" placeholder="Mobile number" name="guardiansMobile">
+                    <div class="invalid-feedback">
+                        <%=error.guardiansMobile%>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input type="hidden" class="form-control w-25" id="id" name="id">
                 </div>
                 <div class="col-md-4">
-                    <label for="inputState" class="form-label">Class</label>
+                    <label for="class" class="form-label">Class</label>
                     <br />
-                    <select id="inputState" class="form-select border-2">
-                        <option selected>Class</option>
+                    <select name="className" id="className" class="form-select border-2 w-25"
+                        required="<%= error.className %>">
+                        <option value="">Class</option>
                         <option value="one">One</option>
                         <option value="two">Two</option>
                         <option value="three">Three</option>
                         <option value="four">Four</option>
                         <option value="five">Five</option>
                     </select>
+                    <div class="invalid-feedback">
+                        <%=error.className%>
+                    </div>
                 </div>
                 <button type="submit" class="mt-3 btn btn-primary">Admission</button>
             </form>
@@ -61,6 +82,7 @@
                         <th scope="col">Mother</th>
                         <th scope="col">Class</th>
                         <th scope="col">Mobile</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,6 +102,10 @@
                             </td>
                             <td>
                                 <%= student.guardiansMobile %>
+                            </td>
+                            <td>
+                                <button class="btn btn-warning text-white">Edit</button>
+                                <a class="btn btn-danger" href="/api/student/delete/<%=student._id %>">Delete</a>
                             </td>
                         </tr>
                         <% } %>
