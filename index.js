@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config()
 
 const studentRouter = require('./routes');
 
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
 const port = process.env.PORT || 8080;
 
 mongoose.set("strictQuery", false);
-mongoose.connect('mongodb://127.0.0.1/studentAdmission')
+mongoose.connect(process.env.DB_URL)
     .then(() => {
         app.listen(port, () => {
             console.log(`Server is running on PORT ${port}`);
