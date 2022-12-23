@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="my-4">
+            <h4>Admission a new student</h4>
+            <form action="/api/student" method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Student name</label>
+                    <input type="text" class="form-control w-25" id="name" placeholder="Student name" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Father name</label>
+                    <input type="text" class="form-control w-25" id="fatherName" placeholder="Father name"
+                        name="fatherName">
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Mother name</label>
+                    <input type="text" class="form-control w-25" id="motherName" placeholder="Mother name"
+                        name="motherName">
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Mobile</label>
+                    <input type="text" class="form-control w-25" id="mobile" placeholder="Mobile number" name="mobile">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label">Class</label>
+                    <br />
+                    <select id="inputState" class="form-select border-2">
+                        <option selected>Class</option>
+                        <option value="one">One</option>
+                        <option value="two">Two</option>
+                        <option value="three">Three</option>
+                        <option value="four">Four</option>
+                        <option value="five">Five</option>
+                    </select>
+                </div>
+                <button type="submit" class="mt-3 btn btn-primary">Admission</button>
+            </form>
+        </div>
+        <div>
+            <h4>All Student List</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Father</th>
+                        <th scope="col">Mother</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Mobile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(let student of students) {%>
+                        <tr>
+                            <td>
+                                <%= student.name %>
+                            </td>
+                            <td>
+                                <%= student.fathersName %>
+                            </td>
+                            <td>
+                                <%= student.mothersName %>
+                            </td>
+                            <td>
+                                <%= student.class %>
+                            </td>
+                            <td>
+                                <%= student.guardiansMobile %>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

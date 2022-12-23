@@ -4,11 +4,13 @@ exports.getStudents = async (req, res) => {
     try {
         const students = await Student.find();
 
-        res.status(200).json({
-            success: true,
-            message: 'Successfully get students',
-            students
-        })
+        res.render('index', { students })
+
+        // res.status(200).json({
+        //     success: true,
+        //     message: 'Successfully get students',
+        //     students
+        // })
     } catch (error) {
         return res.status(500).json({
             success: false,
