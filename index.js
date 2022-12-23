@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/student', studentRouter)
 
 app.get('/', (req, res) => {
-    res.send('<h1>Welcome to Student Admission Node Express Mongoose Simple Project')
+    res.redirect('/api/student')
 })
 
 const port = process.env.PORT || 8080;
