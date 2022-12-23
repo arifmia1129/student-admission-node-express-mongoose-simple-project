@@ -1,3 +1,4 @@
+const { findOneAndUpdate } = require("./Student");
 const Student = require("./Student")
 
 exports.getStudents = async (req, res) => {
@@ -109,16 +110,31 @@ exports.addStudent = async (req, res) => {
             return res.render('index', { students, error })
         }
 
-        const student = new Student({
-            name,
-            fathersName,
-            mothersName,
-            class: className,
-            guardiansMobile
-        });
-        await student.save();
-        const latestStudents = await Student.find();
-        res.render('index', { students: latestStudents, error: {} })
+        if (id) {
+            const result = await Student.findOneAndUpdate({ _id: id }, {
+                $set: {
+                    name,
+                    fathersName,
+                    mothersName,
+                    class: className,
+                    guardiansMobile
+                }
+            })
+            const students = await Student.find();
+            res.render('index', { students, error: {} })
+
+        } else {
+            const student = new Student({
+                name,
+                fathersName,
+                mothersName,
+                class: className,
+                guardiansMobile
+            });
+            await student.save();
+            const latestStudents = await Student.find();
+            res.render('index', { students: latestStudents, error: {} })
+        }
     } catch (error) {
         return res.status(500).json({
             success: false,
