@@ -11,6 +11,7 @@ router.route('/:studentId')
     .put(studentControllers.updateStudentById)
     .delete(studentControllers.deleteStudentById)
 
+// delete student from html page
 router.get('/delete/:id', studentControllers.deleteStudent)
 
 module.exports = router;
